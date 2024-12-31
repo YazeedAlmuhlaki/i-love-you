@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loli's Love Message Encoder</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            background-color: #ffe4e1;
+            color: #d32f2f;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 3em;
+            color: #ff69b4;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.2em;
+            color: #d32f2f;
+        }
+        textarea {
+            width: 80%;
+            height: 100px;
+            margin-bottom: 20px;
+            border: 2px solid #d32f2f;
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 1.2em;
+            background-color: #fffaf0;
+            outline: none; /* Prevents unintended focus border styles */
+        }
+        textarea:focus {
+            border: 2px solid #ff69b4; /* Optional: Add a focus border color */
+        }
+        button {
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            margin: 10px;
+        }
+        button:hover {
+            background-color: #ff85c1;
+        }
+        #output {
+            margin-top: 20px;
+            font-size: 1.5em;
+            font-style: italic;
+            word-wrap: break-word;
+            white-space: pre-line; /* Ensure newlines are preserved */
+            color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <h1>💖 For My Loli 💖</h1>
+    <p>This is a special place to write a heartfelt message for my beloved Loli!</p>
+    <textarea id="message" placeholder="My love message for Loli..."></textarea><br>
+    <button id="encryptButton">Encrypt to Emojis 💝</button>
+    <button id="decryptButton">Decrypt to Text 💌</button>
+    <div id="output"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const emojiMap = {
+                'a': '🌹', 'b': '💎', 'c': '💌', 'd': '🎵', 'e': '✨',
+                'f': '🌟', 'g': '❤️', 'h': '💘', 'i': '🌷', 'j': '🍫',
+                'k': '🎁', 'l': '💕', 'm': '💋', 'n': '🌙', 'o': '🌼',
+                'p': '💍', 'q': '🎈', 'r': '🎶', 's': '🌻', 't': '💓',
+                'u': '🌸', 'v': '💖', 'w': '🎂', 'x': '🌺', 'y': '💝', 'z': '🎆',
+                ' ': '🤍', '\n': '\n', '1': '1️⃣', '2': '2️⃣', '3': '3️⃣', '4': '4️⃣', '5': '5️⃣',
+                '6': '6️⃣', '7': '7️⃣', '8': '8️⃣', '9': '9️⃣', '0': '0️⃣', ',': '➖', '.': '🔸', '!': '❗', '?': '❓'
+            };
+
+            const reverseEmojiMap = Object.fromEntries(
+                Object.entries(emojiMap).map(([key, value]) => [value, key])
+            );
+
+            function encryptMessage() {
+                const message = document.getElementById('message').value;
+                const encrypted = message.split('').map(char => emojiMap[char.toLowerCase()] || char).join('');
+                document.getElementById('output').textContent = encrypted;
+            }
+
+            function decryptMessage() {
+                const encrypted = document.getElementById('message').value;
+                const decrypted = encrypted.match(/🌹|💎|💌|🎵|✨|🌟|❤️|💘|🌷|🍫|🎁|💕|💋|🌙|🌼|💍|🎈|🎶|🌻|💓|🌸|💖|🎂|🌺|💝|🎆|🤍|\n|1️⃣|2️⃣|3️⃣|4️⃣|5️⃣|6️⃣|7️⃣|8️⃣|9️⃣|0️⃣|➖|🔸|❗|❓|./g)
+                    .map(char => reverseEmojiMap[char] || char).join('');
+                document.getElementById('output').textContent = decrypted;
+            }
+
+            document.getElementById('encryptButton').addEventListener('click', encryptMessage);
+            document.getElementById('decryptButton').addEventListener('click', decryptMessage);
+        });
+    </script>
+</body>
+</html>
